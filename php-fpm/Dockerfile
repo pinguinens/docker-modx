@@ -31,15 +31,18 @@ RUN mkdir -p ${SRC_ROOT} \
         revolution-$MODX_VER-pl/manager \
         revolution-$MODX_VER-pl/setup \
         revolution-$MODX_VER-pl/_build \
-        revolution-$MODX_VER-pl/index.php
+        revolution-$MODX_VER-pl/index.php \
+        revolution-$MODX_VER-pl/ht.access
 
-COPY docker-container-start.sh docker-modx-prepare.sh $ENTRYPOINT_PATH/
+COPY docker-container-start.sh docker-modx-prepare.sh docker-modx-cli-install.sh $ENTRYPOINT_PATH/
 
 RUN chmod 0777 \
         $ENTRYPOINT_PATH/docker-container-start.sh \
         $ENTRYPOINT_PATH/docker-modx-prepare.sh \
+        $ENTRYPOINT_PATH/docker-modx-cli-install.sh \
     && chmod +x \
         $ENTRYPOINT_PATH/docker-container-start.sh \
-        $ENTRYPOINT_PATH/docker-modx-prepare.sh
+        $ENTRYPOINT_PATH/docker-modx-prepare.sh \
+        $ENTRYPOINT_PATH/docker-modx-cli-install.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-container-start.sh"]

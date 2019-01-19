@@ -26,6 +26,7 @@ services:
       env_file:
         - ./mysql/credentials.env
         - ./php-fpm/paths.env
+        - ./php-fpm/modx_install.env
       depends_on:
         - mysql
 
