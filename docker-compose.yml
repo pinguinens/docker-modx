@@ -1,5 +1,21 @@
 version: "3.7"
 services:
+    #database
+    mysql:
+      build: ./mysql
+      ports:
+        - "3306:3306"
+      volumes:
+        - ./mysql/instance:/var/lib/mysql:rw
+        # MySQL config
+        - ./mysql/config/local.cnf:/etc/mysql/conf.d/local.cnf:ro
+      environment:
+        - MYSQL_ROOT_PASSWORD=rootpass
+        - MYSQL_DATABASE=modx_website
+        - MYSQL_USER=modx_user
+        - MYSQL_PASSWORD=modx_pass
+      command: "mysqld --sql-mode=NO_ENGINE_SUBSTITUTION"
+    
     # php-fpm
     php:
       build: ./php-fpm
@@ -32,19 +48,3 @@ services:
         - ./nginx/ca/server.key/:/etc/nginx/server.key:ro
       depends_on:
         - php
-
-    #database
-    mysql:
-      build: ./mysql
-      ports:
-        - "3306:3306"
-      volumes:
-        - ./mysql/instance:/var/lib/mysql
-        # MySQL config
-        - ./mysql/config/local.cnf:/etc/mysql/conf.d/local.cnf
-      environment:
-        - MYSQL_ROOT_PASSWORD=rootpass
-        - MYSQL_DATABASE=modx_website
-        - MYSQL_USER=modx_user
-        - MYSQL_PASSWORD=modx_pass
-      command: "mysqld --sql-mode=NO_ENGINE_SUBSTITUTION"

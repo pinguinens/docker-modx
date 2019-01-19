@@ -1,8 +1,8 @@
 #!/bin/bash
-echo "Copying MODX... \n"
+echo "Copying MODX..."
 mv /var/www/src/modx/* $HTML_ROOT
 
-echo "Configuring MODX... \n"
+echo "Configuring MODX..."
 cp $HTML_ROOT/_build/build.config.sample.php $HTML_ROOT/_build/build.config.php
 cp $HTML_ROOT/_build/build.properties.sample.php $HTML_ROOT/_build/build.properties.php
 
@@ -17,7 +17,8 @@ echo "define('XPDO_DB_PASS', ''modx_pass);" >> $config
 echo "define('XPDO_TABLE_PREFIX', 'modx_');" >> $config
 echo $config > $HTML_ROOT/_build/build.config.php
 
-echo "Building MODX... \n"
+echo "Building MODX..."
 php $HTML_ROOT/_build/transport.core.php
+rm -r $HTML_ROOT/_build
 
-rm $HTML_ROOT/.gitkeep
+echo "MODX is ready"
