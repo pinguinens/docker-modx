@@ -9,11 +9,8 @@ services:
         - ./mysql/instance:/var/lib/mysql:rw
         # MySQL config
         - ./mysql/config/local.cnf:/etc/mysql/conf.d/local.cnf:ro
-      environment:
-        - MYSQL_ROOT_PASSWORD=rootpass
-        - MYSQL_DATABASE=modx_website
-        - MYSQL_USER=modx_user
-        - MYSQL_PASSWORD=modx_pass
+      env_file:
+        - ./mysql/credentials.env
       command: "mysqld --sql-mode=NO_ENGINE_SUBSTITUTION"
     
     # php-fpm
@@ -26,8 +23,9 @@ services:
         - ./app/src:/var/www/html:rw
         # php.ini
         - ./php-fpm/config/php.ini:/usr/local/etc/php/php.ini:ro
-      environment:
-        - HTML_ROOT=/var/www/html
+      env_file:
+        - ./mysql/credentials.env
+        - ./php-fpm/paths.env
       depends_on:
         - mysql
 

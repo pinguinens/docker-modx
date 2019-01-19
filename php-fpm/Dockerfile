@@ -1,6 +1,7 @@
 FROM php:7.3.1-fpm
 ENV MODX_VER 2.7.0
 ENV ENTRYPOINT_PATH /usr/local/bin
+ENV SRC_ROOT /var/www/src
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -21,10 +22,10 @@ RUN pecl install \
         # xdebug \
         imagick
 
-RUN mkdir -p /var/www/src \
-    && mkdir -p /var/www/src/modx \
-    && curl -o /var/www/src/modx.tar.gz -SL https://github.com/modxcms/revolution/archive/v${MODX_VER}-pl.tar.gz \
-    && tar xfvz /var/www/src/modx.tar.gz -C /var/www/src/modx --strip=1 \
+RUN mkdir -p ${SRC_ROOT} \
+    && mkdir -p ${SRC_ROOT}/modx \
+    && curl -o ${SRC_ROOT}/modx.tar.gz -SL https://github.com/modxcms/revolution/archive/v${MODX_VER}-pl.tar.gz \
+    && tar xfvz ${SRC_ROOT}/modx.tar.gz -C ${SRC_ROOT}/modx --strip=1 \
         revolution-$MODX_VER-pl/connectors \
         revolution-$MODX_VER-pl/core \
         revolution-$MODX_VER-pl/manager \
