@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Preparing MODX..."
 echo "Copying MODX..."
 mv $SRC_ROOT/modx/* $HTML_ROOT
 
@@ -11,10 +12,10 @@ echo "/* define the MODX path constants necessary for core installation */" >> $
 echo "define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');" >> $config
 echo "define('MODX_CONFIG_KEY', 'config');" >> $config
 echo "/* define the connection variables */" >> $config
-echo "define('XPDO_DSN', 'mysql:host=mysql;dbname=$MYSQL_DATABASE;charset=utf8');" >> $config
+echo "define('XPDO_DSN', 'mysql:host=$MODX_DB_SERVER;dbname=$MYSQL_DATABASE;charset=$MODX_DB_CONNECTION_CHARSET');" >> $config
 echo "define('XPDO_DB_USER', '$MYSQL_USER');" >> $config
 echo "define('XPDO_DB_PASS', '$MYSQL_PASSWORD');" >> $config
-echo "define('XPDO_TABLE_PREFIX', 'modx_');" >> $config
+echo "define('XPDO_TABLE_PREFIX', '$MODX_TABLE_PREFIX');" >> $config
 echo $config > $HTML_ROOT/_build/build.config.php
 
 echo "Building MODX..."
