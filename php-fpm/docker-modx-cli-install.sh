@@ -37,16 +37,22 @@ install_config=$(echo $install_config | sed "s/<cmsadminemail>email@address.com/
 echo "  Param: cmsadminemail";
 install_config=$(echo $install_config | sed "s/<remove_setup_directory>1/<remove_setup_directory>$MODX_REMOVE_SETUP_DIRECTORY/g")
 echo "  Param: remove_setup_directory";
+MODX_CONTEXT_CONNECTORS_PATH=$(echo $MODX_CONTEXT_CONNECTORS_PATH | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_connectors_path>\/www\/modx\/connectors\//<context_connectors_path>$MODX_CONTEXT_CONNECTORS_PATH/g")
 echo "  Param: context_connectors_path";
+MODX_CONTEXT_CONNECTORS_URL=$(echo $MODX_CONTEXT_CONNECTORS_URL | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_connectors_url>\/modx\/connectors\//<context_connectors_url>$MODX_CONTEXT_CONNECTORS_URL/g")
 echo "  Param: context_connectors_url";
+MODX_CONTEXT_MANAGER_PATH=$(echo $MODX_CONTEXT_MANAGER_PATH | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_mgr_path>\/www\/modx\/manager\//<context_mgr_path>$MODX_CONTEXT_MANAGER_PATH/g")
 echo "  Param: context_mgr_path";
+MODX_CONTEXT_MANAGER_URL=$(echo $MODX_CONTEXT_MANAGER_URL | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_mgr_url>\/modx\/manager\//<context_mgr_url>$MODX_CONTEXT_MANAGER_URL/g")
 echo "  Param: context_mgr_url";
+MODX_CONTEXT_WEB_PATH=$(echo $MODX_CONTEXT_WEB_PATH | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_web_path>\/www\/modx\//<context_web_path>$MODX_CONTEXT_WEB_PATH/g")
 echo "  Param: context_web_path";
+MODX_CONTEXT_WEB_URL=$(echo $MODX_CONTEXT_WEB_URL | sed "s/\//\\\\\//g")
 install_config=$(echo $install_config | sed "s/<context_web_url>\/modx\//<context_web_url>$MODX_CONTEXT_WEB_URL/g")
 echo "  Param: context_web_url";
 
