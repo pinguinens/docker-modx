@@ -1,24 +1,25 @@
-version: "3.7"
+version: "3"
 services:
     #database
     mysql:
+      container_name: "modxmysql"
       build: ./mysql
       ports:
-        - "3306:3306"
+        - "3306"
       volumes:
         - ./mysql/instance:/var/lib/mysql:rw
         # MySQL config
         - ./mysql/config/local.cnf:/etc/mysql/conf.d/local.cnf:ro
       env_file:
         - ./mysql/credentials.env
-      command: "mysqld --sql-mode=NO_ENGINE_SUBSTITUTION"
+      command: "mysqld --sql-mode=NO_ENGINE_SUBSTITUTION --default-authentication-plugin=mysql_native_password"
     
     # php-fpm
     php:
       build: ./php-fpm
       ports:
         - "9000"
-        - "9009:9009"
+        - "9009"
       volumes:
         - ./app/src:/var/www/html:rw
         # php.ini
@@ -32,10 +33,11 @@ services:
 
     # web server
     nginx:
+      container_name: "modxnginx"
       build: ./nginx
       ports:
-        - "80:80"
-        - "443:443"
+        - "80"
+        - "443"
       volumes:
         # app
         - ./app/src:/var/www/html:rw
@@ -47,3 +49,8 @@ services:
         - ./nginx/ca/server.key/:/etc/nginx/server.key:ro
       depends_on:
         - php
+
+networks:
+  default:
+    external:
+      name: dockernet
