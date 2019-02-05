@@ -22,6 +22,9 @@ echo "Building MODX..."
 php $HTML_ROOT/_build/transport.core.php
 rm -r $HTML_ROOT/_build
 
+echo "Fixing permissions..,"
+chmod -R 0755 $HTML_ROOT
+
 if [[ $MODX_INSTALL_TYPE == "cli" ]]; then
     bash $ENTRYPOINT_PATH/docker-modx-cli-install.sh; 
 fi
