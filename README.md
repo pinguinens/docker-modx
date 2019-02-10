@@ -21,7 +21,7 @@ MODX scripts are located on host, you can edit files directly without rebuilding
 - MODX 2.7.0-pl
 - nginx:1.15.7
 - php:7.3.1-fpm
-- mysql:8.0.13
+- mariadb:10.1.38-bionic
 - Self-signed SSL Certificate
 
 ### PHP Extensions
@@ -36,7 +36,7 @@ Edit `./php-fpm/modx_install.env` before start.
 * `MODX_INSTALL_TYPE=web` - manual web installation
 
 ### Configuration MYSQL
-Edit `./mysql/credentials.env` before start.
+Edit `./mariadb/credentials.env` before start.
 
 ### Build and Run
 
@@ -57,3 +57,4 @@ Pinguinens <nikolay@tegra.media>
 MIT
 
   [1]: architecture.jpg
+  
